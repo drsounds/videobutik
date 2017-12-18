@@ -1,0 +1,68 @@
+﻿@model Videobutik.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfDaysInRentalPeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfDaysInRentalPeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MovieId }) |
+    @if (ViewBag.Rent != null && !ViewBag.Rent.IsReturned)
+    {
+        @String.Format("Du hyr filmen, {0} kvar", ViewBag.Rent.TimeLeft.TotalDays)
+        @Html.ActionLink("Lämna tillbaka", "Return", new { id=Model.MovieId})
+    }
+    else
+    {
+        @Html.ActionLink("Rent", "Rent", new { id = Model.MovieId })
+
+    } | 
+    @Html.ActionLink("Back to List", "Index")
+</p>

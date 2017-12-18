@@ -1,0 +1,55 @@
+﻿@using Videobutik.Models
+@{
+    
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Filmer du hyr nu</h2>
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Dagar kvar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(Rent rent in ViewBag.Rents)
+                {
+                <tr>
+                    <td>@Html.ActionLink(rent.Movie.Name, "Details", "Movies", new { Id = rent.Movie.MovieId }, null)</td>
+                    <td>
+                        @Math.Floor(rent.TimeLeft.TotalDays) dagar kvar
+                    </td>
+                    <td>
+                        @Html.ActionLink("Return item", "Return", "Movies", new { Id = rent.Movie.MovieId}, null)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <h2>Återlämnade filmer</h2>
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Dagar kvar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Rent rent in ViewBag.Returns)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(rent.Movie.Name, "Details", "Movies", new { Id = rent.Movie.MovieId }, null)</td>
+                        <td>
+                            @Math.Floor(rent.TimeLeft.TotalDays) dagar kvar
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+</div>
